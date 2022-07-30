@@ -54,6 +54,60 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        ArrayList<String> monthList=new ArrayList<>();
+        monthList.add("M");
+        monthList.add("MM");
+        monthList.add("MMM");
+        monthList.add("MMMM");
+        spMonth.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,monthList));
+        spMonth.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tvResult.setText(changeFormat(date, monthList.get(i)));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ArrayList<String> yearList=new ArrayList<>();
+        yearList.add("yy");
+        yearList.add("yyyy");
+        spYear.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,yearList));
+        spYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tvResult.setText(changeFormat(date,yearList.get(i)));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ArrayList<String> hourList=new ArrayList<>();
+        hourList.add("h");
+        hourList.add("hh");
+        hourList.add("H");
+        hourList.add("HH");
+        spHour.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, hourList));
+        spHour.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tvResult.setText(changeFormat(date,hourList.get(i)));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
     }
 
     private String changeFormat(Date date, String s) {
