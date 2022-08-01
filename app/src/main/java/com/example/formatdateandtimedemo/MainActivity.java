@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -107,7 +108,57 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        ArrayList<String> minuteList=new ArrayList<>();
+        minuteList.add("m");
+        minuteList.add("mm");
+        spMinute.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,minuteList));
+        spMinute.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tvResult.setText(changeFormat(date,minuteList.get(i)));
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ArrayList<String> secondList=new ArrayList<>();
+        secondList.add("s");
+        secondList.add("ss");
+        spSecond.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,secondList));
+        spSecond.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                tvResult.setText(changeFormat(date,secondList.get(i)));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        ArrayList<String> timeList=new ArrayList<>();
+        timeList.add("a");
+        timeList.add("a");
+        spTime.setAdapter(new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item,timeList));
+        spTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (timeList.get(i).equals("a")){
+                    tvResult.setText(changeFormat(date,timeList.get(i)).toLowerCase());
+                }else{
+                    tvResult.setText(changeFormat(date,timeList.get(i)));
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     private String changeFormat(Date date, String s) {
